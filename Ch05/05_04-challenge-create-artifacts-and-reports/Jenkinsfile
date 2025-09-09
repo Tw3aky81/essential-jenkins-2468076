@@ -46,7 +46,9 @@ pipeline {
             echo "Archiving the JAR file..."
             archiveArtifacts allowEmptyArchive: true, 
                 artifacts: '**/*.jar', 
-                followSymlinks: false
+                fingerprint: true, 
+                followSymlinks: false, 
+                onlyIfSuccessful: true
         }
     }
 }
