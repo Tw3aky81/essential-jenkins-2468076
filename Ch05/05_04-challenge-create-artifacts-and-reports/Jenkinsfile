@@ -40,10 +40,10 @@ pipeline {
     post {
         always {
             echo "Collecting jUnit test results..."
-            junit allowEmptyResults: true, testResults: 'Ch05/05_04-challenge-create-artifacts-and-reports/target/test-reports/*.xml'
+            junit allowEmptyResults: true, testResults: '**/TEST-com.learningjenkins.AppTest.xml'
 
             echo "Archiving the JAR file..."
-            archiveArtifacts artifacts: '**/*.jar', followSymlinks: false
+            archiveArtifacts artifacts: '**/hello-1.0-SNAPSHOT.jar', followSymlinks: false
         }
     }
 }
