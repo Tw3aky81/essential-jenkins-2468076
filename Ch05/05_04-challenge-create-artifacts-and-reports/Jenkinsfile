@@ -16,8 +16,7 @@ pipeline {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_04-challenge-create-artifacts-and-reports"){
                     echo "Cleaning the workspace..."
-                    // Uncomment the following line after Maven is configured as a global tool
-                    // sh 'mvn clean'
+                    sh 'mvn clean'
                 }
             }
         }
@@ -25,8 +24,7 @@ pipeline {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_04-challenge-create-artifacts-and-reports"){
                     echo "Running tests..."
-                    // Uncomment the following line after Maven is configured as a global tool
-                    // sh 'mvn test'
+                    sh 'mvn test'
                 }
             }
         }
@@ -34,8 +32,7 @@ pipeline {
             steps {
                 dir("${env.WORKSPACE}/Ch05/05_04-challenge-create-artifacts-and-reports"){
                     echo "Creating the JAR file..."
-                    // Uncomment the following line after Maven is configured as a global tool
-                    // sh 'mvn package -DskipTests'
+                    sh 'mvn package -DskipTests'
                 }
             }
         }
@@ -43,10 +40,10 @@ pipeline {
     post {
         always {
             echo "Collecting jUnit test results..."
-            // Add jUnit report collection here...
+            junit allowEmptyResults: true, testResults: 'Ch05/05_04-challenge-create-artifacts-and-reports/target/test-reports/*.xml'
 
             echo "Archiving the JAR file..."
-            // Add artifact archiving here...
+            archiveArtifacts artifacts: '**/*.jar', followSymlinks: false
         }
     }
 }
